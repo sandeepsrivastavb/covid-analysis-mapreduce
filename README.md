@@ -54,37 +54,37 @@ You can download sample dataset using following terminal commands
 (covid19 dataset for task-1, task-2 and task-3)
 ```sh
 wget http://bmidb.cs.stonybrook.edu/publicdata/cse532-s20/covid19_full_data.csv
-hdfs dfs -mkdir -p /cse532/input
-hdfs dfs -put covid19_full_data.csv /cse532/input/
+hdfs dfs -mkdir -p /input
+hdfs dfs -put covid19_full_data.csv /input/
 ```
 
 (population dataset for task-3)
 ```sh
 wget http://bmidb.cs.stonybrook.edu/publicdata/cse532-s20/populations.csv
-hdfs dfs -mkdir -p /cse532/cache
-hdfs dfs -put populations.csv /cse532/cache/
+hdfs dfs -mkdir -p /cache
+hdfs dfs -put populations.csv /cache/
 ```
 
 ## Execute Jobs
 ### Hadoop Job
 ```sh
-hadoop Covid19.jar Covid19_1 /cse532/input/covid19_full_data.csv true /cse532/output/
-hadoop Covid19.jar Covid19_1 /cse532/input/covid19_full_data.csv false /cse532/output/
-hadoop Covid19.jar Covid19_2 /cse532/input/covid19_full_data.csv 2020-01-01 2020-03-31 /cse532/output/
-hadoop Covid19.jar Covid19_3 /cse532/input/covid19_full_data.csv cse532/input/populations.csv /cse532/output/
+hadoop Covid19.jar Covid19_1 /input/covid19_full_data.csv true /output/
+hadoop Covid19.jar Covid19_1 /input/covid19_full_data.csv false /output/
+hadoop Covid19.jar Covid19_2 /input/covid19_full_data.csv 2020-01-01 2020-03-31 /output/
+hadoop Covid19.jar Covid19_3 /input/covid19_full_data.csv cse532/input/populations.csv /output/
 ```
 ### Spark Job
 ```sh
-spark-submit --class Covid19_1 SparkCovid19.jar /cse532/input/covid19_full_data.csv /cse532/output/
-spark-submit --class Covid19_1 --master local[2] SparkCovid19.jar /cse532/input/covid19_full_data.csv false /cse532/output/
-spark-submit --class Covid19_2 SparkCovid19.jar /cse532/input/covid19_full_data.csv 2020-01-01 2020-03-31 /cse532/output/
+spark-submit --class Covid19_1 SparkCovid19.jar /input/covid19_full_data.csv /output/
+spark-submit --class Covid19_1 --master local[2] SparkCovid19.jar /input/covid19_full_data.csv false /output/
+spark-submit --class Covid19_2 SparkCovid19.jar /input/covid19_full_data.csv 2020-01-01 2020-03-31 /output/
 ```
 ### To view output (Terminal Commands): 
 List contents of HDFS output directory
 ```sh
-hdfs dfs -ls /cse532/output/
+hdfs dfs -ls /output/
 ```
 Print out the contents of output files to terminal
 ```sh
-hdfs dfs -cat /cse532/output/part-*
+hdfs dfs -cat /output/part-*
 ```
